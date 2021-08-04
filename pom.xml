@@ -10,7 +10,8 @@
     </parent>
     <groupId>com.gefuxing</groupId>
     <artifactId>rpc</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <!--<version>0.0.2-SNAPSHOT</version>-->
+    <version>2.0</version>
     <name>rpc</name>
     <description>rpc project for Spring Boot</description>
     <properties>
@@ -43,6 +44,11 @@
             <artifactId>hessian</artifactId>
             <version>4.0.38</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>0.13.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -59,7 +65,44 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <verbose>true</verbose>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+
         </plugins>
+
     </build>
 
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>nexus-releases</name>
+            <url>http://192.168.158.99:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>nexus-snapshots</name>
+            <url>http://192.168.158.99:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <repositories>
+        <repository>
+            <id>nexus-public</id>
+            <name>Nexus Public</name>
+            <url>http://192.168.158.99:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>
